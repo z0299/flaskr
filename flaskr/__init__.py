@@ -38,4 +38,11 @@ def create_app(test_config=None):   # application factory function
     from . import auth
     app.register_blueprint(auth.bp)
     
+    # 'blog' blueprint factory에 등록
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index')
+    # flaskr 앱은 메인 화면이 블로그 글화면이기 때문에 '/' URL을 index로 등록한다
+    # url_rule에 의해 url_for('index') 와 url_for('blog.index') 모두 허용한다. (blog prefix를 등록하지 않았기 때문)
+    
     return app

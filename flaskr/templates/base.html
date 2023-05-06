@@ -1,0 +1,29 @@
+<!doctype html>
+<!-- block title은 브라우저 탭에 위치할 이름을 정한다 -->
+<title>{% block title %}{% endblock %} - Flaskr</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>Flaskr</h1>
+  <ul>
+    <!-- load_logged_in_user -->
+    {% if g.user %}
+      <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}">Register</a>
+      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    <!-- block header는 페이지에 나타나는 title을 정한다 -->
+    {% block header %}{% endblock %}
+  </header>
+  <!-- /flaskr/auth.py에서 flash로 받았던 에러메세지 뿌려주기 -->
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  <!-- block content는 로그인 폼이나 블로그 포스트와 같이 페이지의 컨텐츠가 올라간다 -->
+  {% block content %}{% endblock %}
+</section>

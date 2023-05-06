@@ -44,7 +44,7 @@ def register():
         flash(error)
     
     # 회원가입 실패시 회원가입 화면을 다시 띄워준다.
-    return render_template('auth/register.html')    # html template를 render
+    return render_template('auth/register.html')    # html template을 render
 
 # 'login'이라는 이름의 blueprint 생성
 @bp.route('/login', methods=('GET', 'POST'))
